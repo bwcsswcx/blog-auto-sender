@@ -12,5 +12,5 @@ data/driver/geckodriver
 ```
 
 # 功能
-[ ] 发送博客到个人博客[风吟](https://blog.yilon.top)
-    [ ] 如何选择下拉元素
+[x] 发送博客到个人博客[风吟](https://blog.yilon.top)
+    [x] 如何选择下拉元素
