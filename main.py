@@ -34,6 +34,10 @@ def parse_md(file_path):
         yamls = yaml.load(fields[1].strip(), Loader=yaml.FullLoader)
         contents.update(yamls)
         contents["content"] = "\r\n".join(file.split("---\n```")[1:])
+        if contents.get("cover"):
+            contents["content"] += "\n" + "![img]({})".format(contents.get("cover"))
+        if contents.get("blog"):
+            contents["content"] += "\n" + "**Blog: https://blog.yilon.top**"
     return contents
 
 
@@ -75,6 +79,7 @@ config = load_config()
 # 解析文章内容
 assert len(sys.argv) > 1, "请输入文件全路径"
 contents = parse_md(sys.argv[1])
+
 # 发布个人博客
 
 # 简单界面式
