@@ -11,6 +11,10 @@ https://blog.yilon.top
 data/driver/geckodriver
 ```
 
+pykeyboard 安装
+
+
+
 # 功能
 [x] 发送博客到个人博客[风吟](https://blog.yilon.top)
     [x] 如何选择下拉元素

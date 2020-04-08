@@ -50,7 +50,7 @@ class CDBLOG(BaseBlog):
         time.sleep(1)
         button.submit()
         self.driver.get_cookies()
-        time.sleep(5)
+        time.sleep(3)
 
     def write_blog(self):
         print(self.driver.title)

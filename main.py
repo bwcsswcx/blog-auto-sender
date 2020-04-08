@@ -33,11 +33,12 @@ def parse_md(file_path):
         fields = file.split("---")
         yamls = yaml.load(fields[1].strip(), Loader=yaml.FullLoader)
         contents.update(yamls)
-        contents["content"] = "\r\n".join(file.split("---\n```")[1:])
-        if contents.get("cover"):
-            contents["content"] += "\n" + "![img]({})".format(contents.get("cover"))
+        contents["content"] = ""
         if contents.get("blog"):
-            contents["content"] += "\n" + "**Blog: https://blog.yilon.top**"
+            contents["content"] += "\n" + "> **Blog: https://blog.yilon.top**"
+        contents["content"] += "\r\n".join(file.split("---\n```")[1:])
+        if contents.get("blog"):
+            contents["content"] += "\n" + "> **Blog: https://blog.yilon.top**"
     return contents
 
 
@@ -49,7 +50,6 @@ def post_halo(config, timeout, contents):
         halo.Halo(driver, config, timeout, contents).do_handler()
         print(datetime.datetime.now(), "个人博客发布完成！cost:", (datetime.datetime.now()-start_time).seconds)
     finally:
-        time.sleep(3)
         driver.close()
 
 
@@ -61,7 +61,6 @@ def post_csdn(config, timeout, contents):
         csdn.CSDN(driver, config, timeout, contents).do_handler()
         print(datetime.datetime.now(), "CSDN发布完成！cost:", (datetime.datetime.now() - start_time).seconds)
     finally:
-        time.sleep(3)
         driver.close()
 
 
@@ -73,7 +72,6 @@ def post_cnblog(config, timeout, contents):
         cnblog.CDBLOG(driver, config, timeout, contents).do_handler()
         print(datetime.datetime.now(), "博客园发布完成！cost:", (datetime.datetime.now() - start_time).seconds)
     finally:
-        time.sleep(3)
         driver.close()
 
 
@@ -82,9 +80,30 @@ config = load_config()
 # 解析文章内容
 assert len(sys.argv) > 1, "请输入文件全路径"
 contents = parse_md(sys.argv[1])
-
 # 发布个人博客
-# 加载驱动
-post_halo(config, timeout, contents)
-post_csdn(config, timeout, contents)
-post_cnblog(config, timeout, contents)
+
+# 简单界面式
+while True:
+    print("\n\n此发布系统支持以下平台，请选择:")
+    print("--- 1. halo 个人博客 ---")
+    print("--- 2. csdn 博客    ---")
+    print("--- 3. 博客园       ---")
+    print("--- 0. 退出         ---")
+    choise = input("-->")
+    if choise not in ["0", "1", "2", "3"]:
+        print("输入有误，重新输入。")
+        time.sleep(3)
+        continue
+
+    # 加载驱动
+    if "0" == choise:
+        break
+    if "1" == choise:
+        post_halo(config, timeout, contents)
+        continue
+    if "2" == choise:
+        post_csdn(config, timeout, contents)
+        continue
+    if "3" == choise:
+        post_cnblog(config, timeout, contents)
+        continue
