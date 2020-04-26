@@ -36,7 +36,7 @@ def parse_md(file_path):
         contents["content"] = ""
         if contents.get("blog"):
             contents["content"] += "\n" + "> **Blog: https://blog.yilon.top**"
-        contents["content"] += "\r\n".join(file.split("---\n```")[1:])
+        contents["content"] += "\n".join(fields[2:])
         if contents.get("blog"):
             contents["content"] += "\n" + "> **Blog: https://blog.yilon.top**"
     return contents
