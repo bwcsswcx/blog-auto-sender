@@ -81,29 +81,31 @@ config = load_config()
 assert len(sys.argv) > 1, "请输入文件全路径"
 contents = parse_md(sys.argv[1])
 # 发布个人博客
-
-# 简单界面式
-while True:
-    print("\n\n此发布系统支持以下平台，请选择:")
-    print("--- 1. halo 个人博客 ---")
-    print("--- 2. csdn 博客    ---")
-    print("--- 3. 博客园       ---")
-    print("--- 0. 退出         ---")
-    choise = input("-->")
-    if choise not in ["0", "1", "2", "3"]:
-        print("输入有误，重新输入。")
-        time.sleep(3)
-        continue
-
-    # 加载驱动
-    if "0" == choise:
-        break
-    if "1" == choise:
-        post_halo(config, timeout, contents)
-        continue
-    if "2" == choise:
-        post_csdn(config, timeout, contents)
-        continue
-    if "3" == choise:
-        post_cnblog(config, timeout, contents)
-        continue
+post_halo(config, timeout, contents)
+#
+#
+# # 简单界面式
+# while True:
+#     print("\n\n此发布系统支持以下平台，请选择:")
+#     print("--- 1. halo 个人博客 ---")
+#     print("--- 2. csdn 博客    ---")
+#     print("--- 3. 博客园       ---")
+#     print("--- 0. 退出         ---")
+#     choise = input("-->")
+#     if choise not in ["0", "1", "2", "3"]:
+#         print("输入有误，重新输入。")
+#         time.sleep(3)
+#         continue
+#
+#     # 加载驱动
+#     if "0" == choise:
+#         break
+#     if "1" == choise:
+#         post_halo(config, timeout, contents)
+#         continue
+#     if "2" == choise:
+#         post_csdn(config, timeout, contents)
+#         continue
+#     if "3" == choise:
+#         post_cnblog(config, timeout, contents)
+#         continue
