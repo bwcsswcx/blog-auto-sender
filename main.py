@@ -34,6 +34,8 @@ def parse_md(file_path):
         yamls = yaml.load(fields[1].strip(), Loader=yaml.FullLoader)
         contents.update(yamls)
         contents["content"] = ""
+        if contents.get("cover"):
+            contents["content"] = "![img]({})".format(contents.get("cover")) + "\n"
         if contents.get("blog"):
             contents["content"] += "\n" + "> **Blog: https://blog.yilon.top**"
         contents["content"] += "\n".join(fields[2:])
